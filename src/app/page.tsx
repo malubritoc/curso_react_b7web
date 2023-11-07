@@ -2,12 +2,20 @@
 // e paginas como default
 //import { Circle } from "@/components/shapes";
 
+"use client"
+
 import { Square } from "@/components/square";
 import { Circle } from "@/components/circle";
 import { Shapes } from "@/components/shapes";
-import { Person } from "@/components/Person";
+// import { Person } from "@/components/Person";
 import { Card } from "@/components/Card";
 import { peopleList } from "@/data/peopleList";
+import { CustomButton } from "@/components/CustomButton";
+import { FormEvent } from 'react'
+import { useState } from 'react'
+import { Person } from "@/types/Person";
+import { ToDoItem } from "@/types/ToDoItem";
+
 
 // function Page() {
 //   return (
@@ -102,22 +110,224 @@ import { peopleList } from "@/data/peopleList";
 //   );
 // }
 
-"use client"
+//"use client"
+
+// const Page = () => {
+//   function handleClick() {
+//     alert("Funcionou!");
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex justify-center items-center">
+//       <button onClick={handleClick} className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
+//       <button onClick={
+//         function click() {
+//           alert('Funcionou 2')
+//         }
+//       } className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
+//       <button onClick={() => alert('Funcionou 3')} className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
+//     </div>
+//   )
+// }
+
+
+
+// const Page = () => {
+
+//   const handleButton1 = () => alert('Clicou no botão 1')
+//   const handleButton2 = () => alert('Clicou no botão 2')
+//   const handleButton3 = () => alert('Clicou no botão 3')
+
+//   return (
+//     <div className="w-screen h-screen flex justify-center items-center">
+//       <CustomButton label='Clique aqui' onClick={handleButton1} />
+//       <CustomButton label='Clique aqui 2' onClick={handleButton2} />
+//       <CustomButton label='Clique aqui 3' onClick={handleButton3} />
+//     </div>
+//   );
+// }
+
+// const Page = () => {
+//   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     alert('mandando...')
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex flex-col justify-center items-center">
+//       <h1 className="text-5xl mb-3">Form de Login</h1>
+//       <form onSubmit={handleFormSubmit}>
+//         <input type='text' />
+//         <input type='submit' value='Enviar' />
+//       </form>
+//     </div>
+//   );
+// }
+
+// const Page = () => {
+//   // let count = 0;
+//   // const [ count, setCount ] = useState(0)
+//   const [showSecret, setShowSecret] = useState(false);
+
+
+//   const handleClickButton = () => {
+//     // count++;
+//     // setCount(count + 1)
+//     setShowSecret(!showSecret);
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex flex-col justify-center items-center">
+//       {/* <p>{count}</p> */}
+//       <button className='bg-blue-500 p-3' onClick={handleClickButton}>{showSecret ? 'Ocultar' : 'Mostrar'}</button>
+//       {showSecret &&
+//         <div className="p-3 bg-blue-300 rounded-md mt-3">Área secreta</div>
+//       }
+//     </div>
+//   );
+// }
+
+// const Page = () => {
+//   const [ nameInput, setNameInput ] = useState('')
+
+//   const handleBtnClick = () => {
+
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
+//       <input 
+//         type='text' 
+//         className="border-back p-3 text-xl text-black rounded"
+//         placeholder="digite seu nome"
+//         value={nameInput}
+//         onChange={(e) => setNameInput(e.target.value)}
+//       />
+//       <p>Seu nome é {nameInput}</p>
+//     </div>
+//   );
+// }
+
+// const Page = () => {
+//   const [count, setCount] = useState(0);
+
+//   const handleBtnClick = () => {
+//     setCount(count + 2);
+//     setCount(c => c + 2);
+//     setCount(c => c + 2);
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
+//       <p>{count}</p>
+//       <button onClick={handleBtnClick} className="bg-blue-700 text-white p-3 rounded-md">+6</button>
+//     </div>
+//   );
+// }
+
+// const Page = () => {
+//   const [fullName, setFullName] = useState<Person>({name: 'maria', lastName: 'luisa'})
+
+//   const handleClearButton = () => {
+//     setFullName({name: '', lastName: ''});
+//   }
+
+//   const handleClearNameBtn = () => {
+//     setFullName({...fullName, name: ''})
+//   }
+
+//   return (
+//     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
+//       <input
+//         type='text'
+//         placeholder="Nome"
+//         className="border border-black p-3 text-2xl text-black rounded-md mb-3"
+//         value={fullName.name}
+//         onChange={e => setFullName({ name: e.target.value, lastName: fullName.lastName})}
+//       />
+//       <input
+//         type='text'
+//         placeholder="Sobrenome"
+//         className="border border-black p-3 text-2xl text-black rounded-md mb-3"
+//         value={fullName.lastName}
+//         onChange={e => setFullName({ ...fullName, lastName: e.target.value})}
+//       />
+
+//     <p>Meu nome é...</p>
+//     <p>{fullName.name} {fullName.lastName}</p>
+
+//     <button onClick={handleClearButton}>Limpar</button>
+//     <button onClick={handleClearNameBtn}>Limpar</button>
+//     </div>
+
+//   );
+// }
 
 const Page = () => {
-  function handleClick() {
-    alert("Funcionou!");
+  const [itemInput, setItemInput] = useState('')
+  const [list, setList] = useState<ToDoItem[]>([
+    { id: 1, label: 'Dever de casa', checked: true },
+    { id: 2, label: 'Comprar bolo', checked: false }
+  ])
+
+  const handleAddButton = () => {
+    if (itemInput != '') {
+      setList([
+        ...list,
+        { id: list.length + 1, label: itemInput, checked: false }
+      ])
+      setItemInput('')
+    }
+  }
+
+  const deleteItem = (id: number) => {
+    // alert('Deletando index: ' + index)
+    setList(list.filter(item => item.id !== id))
+  }
+
+  const toggleItem = (id: number) => {
+    let newList = [...list]
+    // for (let i in newList) {
+    //   if (index === parseInt(i)) {
+    //     newList[i].checked  = !newList[i].checked
+    //   }
+    // }
+
+
+    for (let i in newList) {
+      if (newList[i].id === id) {
+        newList[i].checked = !newList[i].checked
+      }
+    }
+
+    setList(newList)
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <button onClick={handleClick} className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
-      <button onClick={
-        function click() {
-          alert('Funcionou 2')
-        }
-      } className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
-      <button onClick={() => alert('Funcionou 3')} className="p-3 bg-blue-700 text-white rounded-md">Clique aqui</button>
+    <div className="w-screen h-screen flex flex-col items-center text-2xl">
+      <h1 className="text-4xl mt-5">Lista de tarefas</h1>
+
+      <div className="flex w-full max-w-lg my-3 p-4 rounded-md bg-gray-300 border-2 border-gray-700">
+        <input
+          type="text"
+          placeholder="O que deseja fazer?"
+          className="flex-1 border border-black p-3 text-2xl text-black rounded-md mr-3"
+          value={itemInput}
+          onChange={e => setItemInput(e.target.value)}
+        />
+        <button onClick={handleAddButton}>Adicionar</button>
+      </div>
+
+      <p className="my-4">{list.length} itens na lista</p>
+
+      <ul className="w-full max-w-lg list-disc pl-5">
+        {list.map((item) => (
+          <li key={item.id}>
+            <input onClick={() => toggleItem(item.id) } type='checkbox' checked={item.checked} className="w-6 h-6 mr-3" />
+            {item.label} - <button onClick={() => deleteItem(item.id)} className="hover:underline">[ deletar ]</button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

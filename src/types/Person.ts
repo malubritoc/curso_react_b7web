@@ -1,5 +1,10 @@
+// export type Person = {
+//     id: number;
+//     name: string;
+//     profession: string;
+// }
+
 export type Person = {
-    id: number;
     name: string;
-    profession: string;
+    lastName: string;
 }
